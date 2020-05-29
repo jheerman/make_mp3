@@ -10,10 +10,10 @@ echo "Looking for subdirectories..."
 for d in *; do
     if [ -d "$d" ]; then
         echo "Looking for flac files in $d"
-        for f in $d/*.flac; do
+        for f in "$d"/*.flac; do
             echo "Converting file $f"
             output=$(echo "$f" | sed -e 's/flac/mp3/g');
-            ffmpeg -v quiet -i "$f" -ab 320k -map_metadata 0 -id3v2_version 3 "$output";                              
+            ffmpeg -i "$f" -ab 320k -map_metadata 0 -id3v2_version 3 "$output";                              
         done
     fi
 done
